@@ -43,7 +43,15 @@ def load_huggingface_component(guess, component_name, lib_name, cls_name, repo_p
             return cls.from_pretrained(os.path.join(repo_path, component_name))
         if component_name.startswith('tokenizer'):
             cls = getattr(importlib.import_module(lib_name), cls_name)
-            comp = cls.from_pretrained(os.path.join(repo_path, component_name))
+            tokenizer_path = os.path.join(repo_path, component_name)
+            load_kwargs = {}
+            merges_path = os.path.join(tokenizer_path, "merges.txt")
+            # Some configs coming from custom checkpoints do not set `merges_file`
+            # in their tokenizer config. When the file is present on disk we
+            # pass it explicitly to avoid `merges_file=None` errors.
+            if os.path.isfile(merges_path):
+                load_kwargs["merges_file"] = merges_path
+            comp = cls.from_pretrained(tokenizer_path, **load_kwargs)
             comp._eventual_warn_about_too_long_sequence = lambda *args, **kwargs: None
             return comp
         if cls_name in ['AutoencoderKL']:
