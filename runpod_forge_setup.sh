@@ -35,19 +35,10 @@ if [ ! -s "cyberrealisticPony_v130.safetensors" ]; then
 fi
 
 if [ ! -s "rillusmRealisticIL_v21.safetensors" ]; then
-  gdown --fuzzy 'https://drive.google.com/file/d/1C6ff1Dp4zY9M_sPRV700LD_DXdultufJ/view?usp=drive_link' \
-    -O rillusmRealisticIL_v21.safetensors
-fi
-
-# Configs (small but also skipped if present)
-if [ ! -s "ui-config.json" ]; then
-  gdown --fuzzy 'https://drive.google.com/file/d/1Rhy9shsvUZQzs03q0IbvdNKmNhueX4QZ/view?usp=drive_link' \
-    -O ui-config.json
-fi
-
-if [ ! -s "config.json" ]; then
-  gdown --fuzzy 'https://drive.google.com/file/d/1yYmhFzBFJSgSLDKN8_GO5Nit4n2Oa0Jb/view?usp=drive_link' \
-    -O config.json
+  if ! gdown --fuzzy 'https://drive.google.com/file/d/1C6ff1Dp4zY9M_sPRV700LD_DXdultufJ/view?usp=drive_link' \
+    -O rillusmRealisticIL_v21.safetensors; then
+    echo "[runpod] WARNING: failed to download rillusmRealisticIL_v21.safetensors; check Drive sharing/quotas. Skipping." >&2
+  fi
 fi
 
 cd ../..
@@ -56,15 +47,19 @@ cd ../..
 ESRGAN_DIR="models/ESRGAN"
 mkdir -p "${ESRGAN_DIR}"
 if [ ! -s "${ESRGAN_DIR}/4x-UltraSharp.pth" ]; then
-  gdown --fuzzy 'https://drive.google.com/file/d/1GsPCwuhPSqUxxtUB8OlNrAUK85XpDthw/view?usp=drive_link' \
-    -O "${ESRGAN_DIR}/4x-UltraSharp.pth"
+  if ! gdown --fuzzy 'https://drive.google.com/file/d/1GsPCwuhPSqUxxtUB8OlNrAUK85XpDthw/view?usp=drive_link' \
+    -O "${ESRGAN_DIR}/4x-UltraSharp.pth"; then
+    echo "[runpod] WARNING: failed to download 4x-UltraSharp.pth; check Drive sharing/quotas. Skipping." >&2
+  fi
 fi
 
 LORA_DIR="models/Lora"
 mkdir -p "${LORA_DIR}"
 if [ ! -s "${LORA_DIR}/BallsDeep-IL-V2.2-S.safetensors" ]; then
-  gdown --fuzzy 'https://drive.google.com/file/d/1cflAGSI4hRMtf3HZJJmH0DKCOOpiLVTB/view?usp=drive_link' \
-    -O "${LORA_DIR}/BallsDeep-IL-V2.2-S.safetensors"
+  if ! gdown --fuzzy 'https://drive.google.com/file/d/1cflAGSI4hRMtf3HZJJmH0DKCOOpiLVTB/view?usp=drive_link' \
+    -O "${LORA_DIR}/BallsDeep-IL-V2.2-S.safetensors"; then
+    echo "[runpod] WARNING: failed to download BallsDeep-IL-V2.2-S.safetensors; check Drive sharing/quotas. Skipping." >&2
+  fi
 fi
 
 # 4) Tell Forge which Torch to install inside its venv
