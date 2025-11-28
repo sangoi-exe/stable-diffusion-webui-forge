@@ -45,6 +45,8 @@ __pycache__
 !extensions-builtin/sd_forge_controlnet/requirements.txt
 !extensions-builtin/forge_legacy_preprocessors/requirements.txt
 !localizations/Put localization files here.txt
+!extensions/adetailer/
+!extensions/adetailer/**
 /interrogate
 /user.css
 /.idea

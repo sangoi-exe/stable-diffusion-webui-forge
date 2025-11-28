@@ -40,5 +40,5 @@ tqdm==4.66.1
 peft==0.13.2
 pydantic==2.8.2
 huggingface-hub==0.26.2
-
+ultralytics
 onnxruntime-gpu==1.20.1
