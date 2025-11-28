@@ -78,6 +78,8 @@ chmod +x webui-user.sh
 # version mismatches with the Torch stack used on RunPod.
 if [ -d "venv" ]; then
   ./venv/bin/python -m pip uninstall -y xformers || true
+  # Ensure hf_transfer is available for HF_HUB_ENABLE_HF_TRANSFER=1
+  ./venv/bin/python -m pip install -q hf_transfer || true
 fi
 
 # 7) Launch Forge (force allow root inside container; venv handled by webui.sh)
