@@ -1,0 +1,4 @@
+# Intentionally left empty for RunPod bootstrap.
+# Upstream may define extra dependencies here; this stub prevents
+# install.py from failing when the file is missing.
+

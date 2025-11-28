@@ -35,6 +35,16 @@ __pycache__
 /styles.csv.bak
 /webui-user.bat
 /webui-user.sh
+
+# Keep specific tracked files even though we ignore the patterns above.
+!requirements_versions.txt
+!ui-config.json
+!config.json
+!webui-user.sh
+!webui-user.bat
+!extensions-builtin/sd_forge_controlnet/requirements.txt
+!extensions-builtin/forge_legacy_preprocessors/requirements.txt
+!localizations/Put localization files here.txt
 /interrogate
 /user.css
 /.idea
